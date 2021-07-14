@@ -82,6 +82,7 @@ public class MaterialSearchBar extends RelativeLayout implements View.OnClickLis
 
     private boolean speechMode;
     private int maxSuggestionCount;
+    private int suggestionAnimationSpeed;
     private boolean navButtonEnabled;
     private boolean roundedSearchBarEnabled;
     private boolean menuDividerEnabled;
@@ -141,6 +142,7 @@ public class MaterialSearchBar extends RelativeLayout implements View.OnClickLis
         menuDividerEnabled = array.getBoolean(R.styleable.MaterialSearchBar_mt_menuDividerEnabled, false);
         dividerColor = array.getColor(R.styleable.MaterialSearchBar_mt_dividerColor, ContextCompat.getColor(getContext(), R.color.searchBarDividerColor));
         searchBarColor = array.getColor(R.styleable.MaterialSearchBar_mt_searchBarColor, ContextCompat.getColor(getContext(), R.color.searchBarPrimaryColor));
+        suggestionAnimationSpeed = array.getInteger(R.styleable.MaterialSearchBar_mt_suggestionsAnimationSpeed, 1200);
 
         //Icon Related Attributes
         menuIconRes = array.getResourceId(R.styleable.MaterialSearchBar_mt_menuIconDrawable, R.drawable.ic_dots_vertical_black_48dp);
@@ -502,7 +504,7 @@ public class MaterialSearchBar extends RelativeLayout implements View.OnClickLis
         if (to == 0 && lp.height == 0)
             return;
         ValueAnimator animator = ValueAnimator.ofInt(from, to);
-        animator.setDuration(200);
+        animator.setDuration(suggestionAnimationSpeed);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

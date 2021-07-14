@@ -67,6 +67,7 @@ public class MaterialSearchBar extends RelativeLayout implements View.OnClickLis
     private OnSearchActionListener onSearchActionListener;
     private boolean searchEnabled;
     private boolean suggestionsVisible;
+    private int lastSuggestionHeight;
     private boolean isSuggestionsEnabled = true;
     private SuggestionsAdapter adapter;
     private float destiny;
@@ -512,10 +513,11 @@ public class MaterialSearchBar extends RelativeLayout implements View.OnClickLis
         });
         if (adapter.getItemCount() > 0)
             animator.start();
+        lastSuggestionHeight = to;
     }
 
     public void showSuggestionsList() {
-        animateSuggestions(0, getListHeight(false));
+        animateSuggestions(lastSuggestionHeight, getListHeight(false));
     }
 
     public void hideSuggestionsList() {
